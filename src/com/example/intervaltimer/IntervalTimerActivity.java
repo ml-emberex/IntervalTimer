@@ -11,7 +11,7 @@ public class IntervalTimerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_interval_layout);
-        intervalManager = new IntervalManager(this);
+        intervalManager = new IntervalManager(this, R.layout.interval_view);
     }
 
     @Override

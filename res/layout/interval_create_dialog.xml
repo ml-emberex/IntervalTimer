@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- <TextView
+        android:id="@+id/interval_create_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/interval_create_header"
+        android:textAppearance="?android:attr/textAppearanceMedium" /> -->
+
+<!--         android:layout_below="@+id/interval_create_dialog_title" -->
+    <EditText
+        android:id="@+id/interval_name_text_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:inputType="text">
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/interval_create_ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/interval_name_text_field"
+        android:layout_below="@+id/interval_name_text_field"
+        android:layout_marginTop="27dp"
+        android:text="@string/interval_create_ok_button_text" />
+
+    <Button
+        android:id="@+id/interval_create_cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/interval_create_ok_button"
+        android:layout_alignBottom="@+id/interval_create_ok_button"
+        android:layout_alignLeft="@+id/interval_name_text_field"
+        android:text="@string/interval_create_cancel_button_text" />
+
+</RelativeLayout>

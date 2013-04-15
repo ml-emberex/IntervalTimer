@@ -6,5 +6,8 @@
     
     <!-- interval strings -->
     <string name="new_interval">New Interval</string>
+    <string name="interval_create_header">Enter Interval Name</string>
+    <string name="interval_create_cancel_button_text">Cancel</string>
+    <string name="interval_create_ok_button_text">OK</string>
 
 </resources>
