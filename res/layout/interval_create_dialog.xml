@@ -35,7 +35,7 @@
         android:text="@string/interval_create_ok_button_text" />
 
     <Button
-        android:id="@+id/interval_create_cancel_button"
+        android:id="@+id/interval_details_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/interval_create_ok_button"

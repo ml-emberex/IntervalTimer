@@ -37,6 +37,7 @@ public class IntervalAdapter extends ArrayAdapter<IntervalView>
         TextView textView;
         textView = (TextView)mainView.findViewById(R.id.interval_name);
         textView.setText(intervalView.getName());
+        textView.setTag(intervalView.getType());
         
         ImageView imageView = (ImageView)mainView.findViewById(R.id.interval_image);
         imageView.setImageResource(intervalView.getImageResourceId());
