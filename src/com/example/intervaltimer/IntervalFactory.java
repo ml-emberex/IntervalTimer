@@ -1,18 +1,14 @@
 package com.example.intervaltimer;
 
-import android.view.View.OnClickListener;
-
-import com.example.intervaltimer.entities.Interval;
-import com.example.intervaltimer.views.IntervalView;
 
 public class IntervalFactory {
 
-    public static IntervalView createInterval(/*Context context, */String intervalName, IntervalType type, OnClickListener clickListener) {
-        Interval interval = new Interval(intervalName, IntervalType.NEW);
-        return createIntervalView(/*context,*/ interval, clickListener);
-    }
+    /*public static IntervalView createInterval(Context context, String intervalName, IntervalType type, OnClickListener clickListener) {
+        Interval interval = new Interval(intervalName);
+        return createIntervalView(context, interval, clickListener);
+    }*/
 
-    private static IntervalView createIntervalView(/*Context context,*/ Interval interval, OnClickListener clickListener)
+    /*private static IntervalView createIntervalView(Context context, Interval interval, OnClickListener clickListener)
     {
         IntervalView intervalView = new IntervalView(interval);
         switch(interval.type)
@@ -27,5 +23,5 @@ public class IntervalFactory {
             intervalView.setImageResourceId(android.R.drawable.ic_menu_revert);
             return intervalView;
         }
-    }
+    }*/
 }

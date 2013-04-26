@@ -8,13 +8,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".IntervalTimer" >
 
+    <Button
+        android:id="@+id/button_create_interval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/create_interval" />
+
     <ListView
         android:id="@+id/main_interval_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-
+        android:layout_below="@+id/button_create_interval" >
     </ListView>
 
 </RelativeLayout>

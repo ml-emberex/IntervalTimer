@@ -1,6 +1,5 @@
 package com.example.intervaltimer.adapters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -8,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.intervaltimer.R;
+import com.example.intervaltimer.entities.Interval;
 import com.example.intervaltimer.views.IntervalView;
 
 public class IntervalAdapter extends ArrayAdapter<IntervalView>
@@ -20,10 +19,16 @@ public class IntervalAdapter extends ArrayAdapter<IntervalView>
     private LayoutInflater layoutInflater;
     private List<IntervalView> intervals;
 
-    public IntervalAdapter(Context context, int viewResourceId, ArrayList<IntervalView> intervals)
+    public IntervalAdapter(Context context, int viewResourceId, List<IntervalView> intervals)
     {
         super(context, viewResourceId, intervals);
         this.intervals = intervals;
+        
+        //
+        //TODO: get rid of this!!!!
+        //
+        this.intervals.add(new IntervalView(new Interval("TEST")));
+
         this.viewResourceId = viewResourceId;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -31,16 +36,16 @@ public class IntervalAdapter extends ArrayAdapter<IntervalView>
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         
-        View mainView = layoutInflater.inflate(viewResourceId, parent, false);
+        View mainView = layoutInflater.inflate(R.layout.interval_view, parent, false);
         IntervalView intervalView = intervals.get(position);
 
         TextView textView;
         textView = (TextView)mainView.findViewById(R.id.interval_name);
         textView.setText(intervalView.getName());
-        textView.setTag(intervalView.getType());
-        
-        ImageView imageView = (ImageView)mainView.findViewById(R.id.interval_image);
-        imageView.setImageResource(intervalView.getImageResourceId());
+//        textView.setTag(intervalView.getType());
+//        
+//        ImageView imageView = (ImageView)mainView.findViewById(R.id.interval_image);
+//        imageView.setImageResource(intervalView.getImageResourceId());
 
         mainView.setOnClickListener(intervalView.getOnClickListener());
         return mainView;

@@ -16,8 +16,8 @@ public class IntervalTimerActivity extends Activity implements StateChangeListen
         
         activityStateManager = new ActivityStateManager(this);
         
-        setContentView(R.layout.main_interval_layout);
-        intervalManager = new IntervalManager(this, R.layout.interval_view);
+        setContentView(R.layout.main_activity_layout);
+        intervalManager = new IntervalManager(this/*, R.layout.interval_view*/);
     }
 
     @Override
