@@ -14,7 +14,6 @@ import com.example.intervaltimer.views.IntervalView;
 
 public class IntervalAdapter extends ArrayAdapter<IntervalView>
 {
-    private int viewResourceId;
     private LayoutInflater layoutInflater;
     private List<IntervalView> intervals;
 
@@ -23,7 +22,6 @@ public class IntervalAdapter extends ArrayAdapter<IntervalView>
         super(context, viewResourceId, intervals);
         this.intervals = intervals;
 
-        this.viewResourceId = viewResourceId;
         layoutInflater = LayoutInflater.from(context);
     }
 

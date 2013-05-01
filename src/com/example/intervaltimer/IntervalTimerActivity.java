@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class IntervalTimerActivity extends Activity implements StateChangeListener
 {
@@ -28,8 +27,10 @@ public class IntervalTimerActivity extends Activity implements StateChangeListen
         activityStateManager = new ActivityStateManager(this);
 
         setContentView(R.layout.main_activity_layout);
-        intervalManager = new IntervalManager(this);
         dialog = new Dialog(this);
+        
+        intervalManager = new IntervalManager(this);
+        //intervalManager.switchToShowAllIntervalsFragment();
     }
 
     @Override
@@ -113,8 +114,7 @@ public class IntervalTimerActivity extends Activity implements StateChangeListen
     public void createInterval(String intervalName)
     {
         intervalManager.addInterval(intervalName);
-        Toast.makeText(this, "create interval in activity reached", Toast.LENGTH_LONG).show();
-        
+        //Toast.makeText(this, "create interval in activity reached", Toast.LENGTH_SHORT).show();
     }
     
     private void onDetailsClicked(ActivityState state)

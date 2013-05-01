@@ -13,16 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.intervaltimer.entities.Interval;
+import com.example.intervaltimer.fragments.IntervalDetailsFragment;
 import com.example.intervaltimer.fragments.IntervalFragment;
 import com.example.intervaltimer.views.IntervalView;
 
 public class IntervalManager //extends BroadcastReceiver
 {
     private IntervalTimerActivity activity;
-    private static List<IntervalView> intervals = Collections.synchronizedList(new ArrayList<IntervalView>());
+    private List<IntervalView> intervals = Collections.synchronizedList(new ArrayList<IntervalView>());
     //private IntervalAdapter intervalAdapter;
     private Fragment currentFragment;
-
+    private IntervalFragment allIntervalsFragment;
     /**
      * @param activity - the context for the intervals
      * @param containerId - the resource id the intervals are to be placed in
@@ -31,35 +32,58 @@ public class IntervalManager //extends BroadcastReceiver
     {
         this.activity = activity;
         
-        //addInterval(activity.getString(R.string.new_interval));
-
-        currentFragment = new IntervalFragment();
+        allIntervalsFragment = new IntervalFragment();
+        //intervalDetailsFragment = new IntervalDetailsFragment();
         
-        switchToShowAllIntervalsFragment();
-        //Bundle data = new Bundle();
-        //data.put("intervals", intervals);
-        //intervalFragment.setArguments(args);
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, allIntervalsFragment);
+        currentFragment = allIntervalsFragment;
+        
+        fragmentTransaction.commit();
     }
 
     public void switchToShowAllIntervalsFragment()
     {
+        //hideCurrentFragment();
+        
         FragmentManager fragmentManager = activity.getFragmentManager();
-        //use addToBackStack to allow back button support.
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, currentFragment);
-        //fragmentTransaction.findFragmentById(R.id.f)
+
+        currentFragment = allIntervalsFragment;
+        fragmentTransaction.replace(R.id.fragment_container, allIntervalsFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
     
     public void switchToIntervalDetails(ActivityState state)
     {
-        // TODO Auto-generated method stub
+        //hideCurrentFragment();
         
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        
+        //TODO: current is not set when back button is pressed. fix it and remove this hack
+        //fragmentTransaction.hide(currentFragment);
+        fragmentTransaction.hide(allIntervalsFragment);
+        currentFragment = new IntervalDetailsFragment();
+        fragmentTransaction.add(R.id.fragment_container, currentFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
+
+    /*private void hideCurrentFragment()
+    {
+        if(currentFragment != null)
+        {
+            FragmentManager fragmentManager = activity.getFragmentManager();
+            FragmentTransaction closeTransaction = fragmentManager.beginTransaction();
+            closeTransaction.hide(currentFragment);
+            closeTransaction.addToBackStack(null);
+            closeTransaction.commit();
+        }
+    }*/
     
-    /*
-     * creating an interval adds it to the list
-     */
     public IntervalView addInterval(String intervalName)
     {
     	IntervalView interval = new IntervalView(new Interval(intervalName));
@@ -79,7 +103,7 @@ public class IntervalManager //extends BroadcastReceiver
             }
         });
     	intervals.add(interval);
-    	((IntervalFragment)currentFragment).addInterval(interval);
+    	allIntervalsFragment.addInterval(interval);
     	return interval;
     }
 

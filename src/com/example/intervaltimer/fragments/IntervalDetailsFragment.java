@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.intervaltimer.R;
 import com.example.intervaltimer.StateChangeListener;
@@ -26,8 +25,8 @@ public class IntervalDetailsFragment extends Fragment
 
     public void setText(String item)
     {
-        TextView view = (TextView) getView().findViewById(R.id.interval_details_time);
-        view.setText(item);
+        //TextView view = (TextView) getView().findViewById(R.id.interval_details_time);
+        //view.setText(item);
     }
     
     @Override

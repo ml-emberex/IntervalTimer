@@ -33,9 +33,7 @@ public class IntervalFragment extends Fragment
         View view = inflater.inflate(R.layout.show_all_intervals, container, false);
         
         View createbutton = view.findViewById(R.id.button_create_interval);
-        createbutton.setOnClickListener(new OnClickListener()
-        {
-            
+        createbutton.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v)
             {
