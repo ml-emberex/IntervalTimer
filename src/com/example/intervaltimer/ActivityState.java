@@ -4,10 +4,10 @@ public class ActivityState
 {
     public enum State {
         INTERVAL_VIEW,
-        DETAILS_VIEW
+        DETAILS_VIEW,
+        NEW_INTERVAL
     };
     
     public State state;
-    //TODO: figure out what this will be and document it
     public int stateId;
 }

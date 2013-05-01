@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.intervaltimer.R;
-import com.example.intervaltimer.entities.Interval;
 import com.example.intervaltimer.views.IntervalView;
 
 public class IntervalAdapter extends ArrayAdapter<IntervalView>
@@ -23,33 +22,30 @@ public class IntervalAdapter extends ArrayAdapter<IntervalView>
     {
         super(context, viewResourceId, intervals);
         this.intervals = intervals;
-        
-        //
-        //TODO: get rid of this!!!!
-        //
-        this.intervals.add(new IntervalView(new Interval("TEST")));
 
         this.viewResourceId = viewResourceId;
         layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        
-        View mainView = layoutInflater.inflate(R.layout.interval_view, parent, false);
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+
+        View mainView = layoutInflater.inflate(R.layout.interval_view, parent,
+                false);
         IntervalView intervalView = intervals.get(position);
 
         TextView textView;
-        textView = (TextView)mainView.findViewById(R.id.interval_name);
+        textView = (TextView) mainView.findViewById(R.id.interval_name);
         textView.setText(intervalView.getName());
-//        textView.setTag(intervalView.getType());
-//        
-//        ImageView imageView = (ImageView)mainView.findViewById(R.id.interval_image);
-//        imageView.setImageResource(intervalView.getImageResourceId());
-
+        
+        if(intervalView.getOnClickListener() != null)
+        {
+            textView.setOnClickListener(intervalView.getOnClickListener());
+        }
+        
         mainView.setOnClickListener(intervalView.getOnClickListener());
         return mainView;
     }
-    
-    
+
 }

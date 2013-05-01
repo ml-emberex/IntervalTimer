@@ -13,4 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <!-- <fragment android:name="com.example.intervaltimer.IntervalFragment"
+            android:id="@+id/list"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" /> -->
 </RelativeLayout>
