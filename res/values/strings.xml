@@ -10,5 +10,9 @@
     <string name="interval_create_cancel_button_text">Cancel</string>
     <string name="interval_create_ok_button_text">OK</string>
     <string name="create_interval">Create Interval</string>
+    <string name="reset">Reset</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="create_new_step">Create new step</string>
 
 </resources>

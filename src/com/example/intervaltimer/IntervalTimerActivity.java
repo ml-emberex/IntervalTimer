@@ -45,11 +45,6 @@ public class IntervalTimerActivity extends Activity implements StateChangeListen
     public void onResume()
     {
         super.onResume();
-        /*
-         * IntentFilter intentfilter = new IntentFilter();
-         * intentfilter.addAction("android.intent.action.MEDIA_BUTTON");
-         * this.registerReceiver(this.mBroadcastReceiver,intentfilter);
-         */
     }
 
     @Override
@@ -102,9 +97,6 @@ public class IntervalTimerActivity extends Activity implements StateChangeListen
                 EditText inputBox = (EditText)dialog.findViewById(R.id.interval_name_text_field);
                 createInterval(inputBox.getText().toString());
                 dialog.dismiss();
-                /*Intent intent = new Intent(activity, IntervalManager.class);
-                activity.sendBroadcast(intent);
-                createInterval(inputBox.getText().toString(), IntervalType.Existing);*/
             }
         });
         
@@ -114,7 +106,6 @@ public class IntervalTimerActivity extends Activity implements StateChangeListen
     public void createInterval(String intervalName)
     {
         intervalManager.addInterval(intervalName);
-        //Toast.makeText(this, "create interval in activity reached", Toast.LENGTH_SHORT).show();
     }
     
     private void onDetailsClicked(ActivityState state)

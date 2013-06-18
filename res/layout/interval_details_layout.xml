@@ -9,16 +9,51 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:format="00:00:00"
+        android:format="0:00:00:0"
         android:textSize="50sp" />
+
+    <LinearLayout android:id="@+id/interval_run_buttons"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_below="@+id/interval_details_total_time">
+
+        <Button
+            android:id="@+id/reset_button"
+            style="?android:attr/selectableItemBackground"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reset" />
+        
+        <ImageView
+            android:id="@+id/new_step_button"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.5"
+            android:contentDescription="@string/create_new_step"
+            android:src="@android:drawable/ic_input_add" />
+
+        <Button
+            android:id="@+id/runaction_button"
+            style="?android:attr/selectableItemBackground"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/start" />
+        
+    </LinearLayout>
 
     <ListView
         android:id="@+id/interval_details_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/interval_details_total_time"
-        android:layout_marginTop="30dp" >
+        android:layout_below="@+id/interval_run_buttons" >
     </ListView>
+
+    
 
 </RelativeLayout>

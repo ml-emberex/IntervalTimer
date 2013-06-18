@@ -1,11 +1,21 @@
 package com.example.intervaltimer.fragments;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.locks.ReentrantLock;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Chronometer;
 
 import com.example.intervaltimer.R;
 import com.example.intervaltimer.StateChangeListener;
@@ -13,22 +23,77 @@ import com.example.intervaltimer.adapters.IntervalDetailsAdapter;
 
 public class IntervalDetailsFragment extends Fragment
 {
+    public enum TimerState{
+        RUNNING,
+        PAUSED,
+        NOT_STARTED
+    }
+    private TimerState timerState = TimerState.NOT_STARTED;
+
     private StateChangeListener listener;
     private IntervalDetailsAdapter intervalDetailsAdapter;
-
+    
+    Timer timer = new Timer();
+    //might have to make this thread safe..
+    private Chronometer timeView;
+    private long starttime;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.interval_details_layout, container, false);
+        
+        timeView = (Chronometer)view.findViewById(R.id.interval_details_total_time);
+
+        Button runButton = (Button)view.findViewById(R.id.runaction_button);
+        runButton.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View runButtonView)
+            {
+                switch(timerState)
+                {
+                case RUNNING:
+                    //reset the time and display based on total interval time
+                    //TODO: move to reset button and pause instead
+                    /*
+                      timer.pause();
+                      timerState = TimerState.PAUSED;
+                    /*/
+                    timer.cancel();
+                    timer.purge();
+                    timerState = TimerState.NOT_STARTED;
+                    //*/
+                    
+                    
+                    ((Button)runButtonView).setText(R.string.start);
+                    
+                    break;
+                case NOT_STARTED:
+                    starttime = System.currentTimeMillis();
+                    //TODO: remove!!!
+                    /*
+                        //other 
+                    /*/
+                    timer = new Timer();
+                    //*/
+                    timer.schedule(new StopWatchTask(), 0, 100);
+                    ((Button)runButtonView).setText(R.string.stop);
+                    timerState = TimerState.RUNNING;
+                    break;
+                case PAUSED:
+                    //timer.notify();
+                    ((Button)runButtonView).setText(R.string.stop);
+                    timerState = TimerState.RUNNING;
+                    break;
+                }
+            }
+        });
+        
+        
         return view;
     }
 
-    public void setText(String item)
-    {
-        //TextView view = (TextView) getView().findViewById(R.id.interval_details_time);
-        //view.setText(item);
-    }
-    
     @Override
     public void onAttach(Activity activity) 
     {
@@ -48,7 +113,49 @@ public class IntervalDetailsFragment extends Fragment
       listener = null;
     }
 
-    public void notifyCreateClicked() 
-    {
-    }
+    /*
+     * local thread handler for updating the timer
+     */
+    final Handler timerHandler = new Handler(new Callback() {
+
+        @Override
+        public boolean handleMessage(Message msg)
+        {
+           //might have to make this thread safe but for now this is the only thing accessing timeView
+           long millis = System.currentTimeMillis() - starttime;
+           int tenthOfASecond = (int)((millis / 100) %10); 
+           int seconds = (int) (millis / 1000);
+           int minutes = (int) (seconds / 60);
+           int hrs = (int) (millis / 3600000);
+           seconds     = (int) (seconds % 60);
+
+           timeView.setText(String.format("%1d:%02d:%02d:%1d", hrs, minutes, seconds, tenthOfASecond));
+           return false;
+        }
+    });
+
+   //tells handler to send a message
+   class StopWatchTask extends TimerTask {
+        private ReentrantLock pauseLock = new ReentrantLock();
+       
+        @Override
+        public void run() {
+            timerHandler.sendEmptyMessage(0);
+        }
+        
+        public void pause()
+        {
+            
+        }
+   };
+   
+   /*private Runnable startTimer = new Runnable() 
+   { 
+       public void run() 
+       { 
+           elapsedTime = System.currentTimeMillis() - startTime; 
+           updateTimer(elapsedTime); 
+           mHandler.postDelayed(this,REFRESH_RATE); 
+       } 
+   };*/
 }
