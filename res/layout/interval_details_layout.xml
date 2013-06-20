@@ -20,7 +20,7 @@
         android:layout_below="@+id/interval_details_total_time">
 
         <Button
-            android:id="@+id/reset_button"
+            android:id="@+id/reset_timer_button"
             style="?android:attr/selectableItemBackground"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:src="@android:drawable/ic_input_add" />
 
         <Button
-            android:id="@+id/runaction_button"
+            android:id="@+id/run_timer_button"
             style="?android:attr/selectableItemBackground"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
