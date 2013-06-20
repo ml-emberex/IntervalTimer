@@ -44,7 +44,20 @@ public class IntervalDetailsFragment extends Fragment
         View view = inflater.inflate(R.layout.interval_details_layout, container, false);
         
         timeView = (Chronometer)view.findViewById(R.id.interval_details_total_time);
-
+        /*timeView.setOnChronometerTickListener(new OnChronometerTickListener(){
+            @Override
+            public void onChronometerTick(Chronometer cArg) 
+            {
+                long time = SystemClock.elapsedRealtime() - cArg.getBase();
+                int h   = (int)(time/3600000);
+                int m = (int)(time - h*3600000)/60000;
+                int s= (int)(time - h*3600000- m*60000)/1000 ;
+                String hh = h < 10 ? "0"+h: h+"";
+                String mm = m < 10 ? "0"+m: m+"";
+                String ss = s < 10 ? "0"+s: s+"";
+                cArg.setText(hh+":"+mm+":"+ss);
+            }
+        });*/
         Button runButton = (Button)view.findViewById(R.id.runaction_button);
         runButton.setOnClickListener(new OnClickListener()
         {
@@ -54,35 +67,19 @@ public class IntervalDetailsFragment extends Fragment
                 switch(timerState)
                 {
                 case RUNNING:
-                    //reset the time and display based on total interval time
-                    //TODO: move to reset button and pause instead
-                    /*
-                      timer.pause();
-                      timerState = TimerState.PAUSED;
-                    /*/
                     timer.cancel();
                     timer.purge();
                     timerState = TimerState.NOT_STARTED;
-                    //*/
-                    
-                    
                     ((Button)runButtonView).setText(R.string.start);
-                    
                     break;
                 case NOT_STARTED:
                     starttime = System.currentTimeMillis();
-                    //TODO: remove!!!
-                    /*
-                        //other 
-                    /*/
                     timer = new Timer();
-                    //*/
                     timer.schedule(new StopWatchTask(), 0, 100);
                     ((Button)runButtonView).setText(R.string.stop);
                     timerState = TimerState.RUNNING;
                     break;
                 case PAUSED:
-                    //timer.notify();
                     ((Button)runButtonView).setText(R.string.stop);
                     timerState = TimerState.RUNNING;
                     break;
